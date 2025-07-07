@@ -1,0 +1,29 @@
+{
+	"name": "PHP",
+	"image": "mcr.microsoft.com/devcontainers/php:1-8.2-bullseye",
+	"customizations": {
+		"vscode": {
+			"settings": {
+			  "terminal.integrated.shell.linux": "/bin/bash",
+			  "php.validate.executablePath": "/usr/local/bin/php",
+			  "php.suggest.basic": false,
+			  "editor.formatOnSave": true
+			},
+			"extensions": [
+			  "felixbecker.php-debug",
+			  "bmewburn.vscode-intelephense-client",
+			  "esbenp.prettier-vscode",
+			  "vivaxy.vscode-conventional-commits"
+			]
+		  }
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		8080
+	],
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers-extra/features/composer:1": {}
+	}
+
+}
