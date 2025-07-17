@@ -1,34 +1,47 @@
 <?php
+include_once("persona.php");
+include_once("asistencia.php");
 
-include_once("Persona.php");
-
-class Empleado extends Persona{
+class Empleado extends Persona implements Asistencia
+{
     private string $cargo;
-    private int $suelo;
+    private int $sueldo;
 
     public function __construct(
         int $id,
         string $nombre,
-        int $edad, 
-        string $documento ,
+        int $edad,
+        string $documento,
         string $tipo,
         string $cargo,
-        string $sueldo,
-    ){
-        parent::__construct($id,$nombre,$edad,$documento,$tipo);
-        $this->sueldo = $sueldo; 
+        int $sueldo
+    ) {
+        parent::__construct($id, $nombre, $edad, $documento, $tipo);
         $this->cargo = $cargo;
+        $this->sueldo = $sueldo;
     }
 
-    public function esMayor():bool
-    {
-        return $this->edad >= 18;
+    // Interfaces
+
+    public function MarcarIngreso(string $metodo): string {
+        return "{$this->nombre} marco el ingreso con {$metodo} <br>";
     }
 
-    public function getSueldo(): int{
-        return $this->sueldo;
+    public function MarcarSalida(string $metodo): string {
+        return "{$this->nombre} marco salida con {$metodo} <br>";
     }
-    public function getCargo(): string{
+
+    // Acciones
+    public function esMayor(): bool {
+        return $this->getEdad() >= 18;
+    }
+
+    public function getcargo(): string {
         return $this->cargo;
     }
-} 
+
+    public function getsueldo(): int {
+        return $this->sueldo;
+    }
+}
+?>

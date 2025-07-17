@@ -1,9 +1,11 @@
 <?php
-require_once "db.php";
-require_once "src/models/camper.php";
-require_once "src/models/Persona.php";
-require_once "src/models/invitado.php";
-require_once "src/models/empleado.php";
+require_once "route.php";
+// require_once "src/models/camper.php";
+// require_once "src/models/persona.php";
+// require_once "src/models/invitado.php";
+// require_once "src/models/empleado.php";
+// require_once "src/models/asistencia.php";
+
 // Objeto
 // $julian = new Camper('Julian', 36, '1234');
 
@@ -17,51 +19,71 @@ require_once "src/models/empleado.php";
 // $julian->asginarNombre('Julian el constante joven de otra altura');
 // echo '<br>';
 
-// echo $julian->traerDocumento();
+// echo $julian->getDocumento();
 
 // var_dump($julian->informacion());
 // echo '<br>';
 
-function ingresarAZonaFranca(Persona $persona): void
-{
-    echo "Ingreso la persona: {$persona->getNombre()}{$persona->esMayor()}"; 
-}
+// function ingresarAZonaFranca(Persona $persona): void
+// {
+//     // $mayorEdad = $persona->esMayor() ? 'True' : 'False';
+//     // echo "<strong>Ingresa la persona:</strong> {$persona->getNombre()} <br> <strong>MayorEdad:</strong> {$mayorEdad} <br> <br>";
+//     echo "Ingresa la persona: {$persona->getNombre()} {$persona->esMayor()} <br> <br>";
+// }
 
-$empleado = new empleado(100, 'julian',24,'04444444', 'cc','administrador',2000);
-$invitado = new invitado(10,'Santiago Cruz', 56, '987654321', 'CC','Adrian','karen');
-$camper = new Camper('Santiago', '4321', 22,  'CC');
+// function tomarAsistencia(Asistencia $funcionario) {
+//     echo '<hr>';
+//     echo $funcionario->MarcarIngreso("PIN");
+//     echo '<hr>';
+//     echo $funcionario->MarcarSalida("Carnet");
+//     echo '<hr>';
+//     echo '<br>';
+// }
+
+// // No deberia poderse crear una instancia en la clase base, para evitar duplicidad o problemas
+// // $persona = new Persona(7, 'Santiago Cruz', 56, '987654321', 'CC');
+
+// $invitado = new Invitado(10, 'Leo Messi', 32, '1010', 'CC', 'Leo', 'Cristiano');
+
+// $empleado = new Empleado(7, 'Cristiano Ronaldo', 40, '9779', 'CC', 'Administrador', 2000);
+
+// // $empleado = new Empleado(7, 'Cristiano Ronaldo', 40, '9779', 'CC', 'Administrador', 2000);
+// // $empleado1 = new Empleado(9, 'Adrian Ronaldo', 40, '9779', 'CC', 'Administrador', 2000);
+// $camper = new Camper(14, 'James Rodriguez', 22, '4321', 'CC');
 
 
-ingresarAZonaFranca($camper);
-ingresarAZonaFranca($invitado);
-ingresarAZonaFranca($empleado);
+// // ingresarAZonaFranca($persona);
+// ingresarAZonaFranca($invitado);
+// ingresarAZonaFranca($empleado);
+// ingresarAZonaFranca($camper);
+
+// tomarAsistencia($camper);
+// tomarAsistencia($empleado1);
+
+// exit;
 
 
 
-exit;
+//$method = $_SERVER['REQUEST_METHOD'];
 
+$route = new Route(
+    $_SERVER['REQUEST_URI'],
+    $_SERVER['REQUEST_METHOD']
+);
 
+$route->handle();
 
+// // echo json_encode(['data' => $method]);
 
+// // localhost:8081/?filter=datos
+// $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+// // echo json_encode($uri);
 
-
-
-
-
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-// echo json_encode(['data' => $method]);
-
-// localhost:8081/?filter=datos
-$uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
-// echo json_encode($uri);
-
-// Obtener / {path} / {otherPath} / ..{}
-// 0 -> products
-// 1 -> 1
-$recurso = $uri[0];
-$id = $uri[1] ?? null;
+// // Obtener / {path} / {otherPath} / ..{}
+// // 0 -> products
+// // 1 -> 1
+// $recurso = $uri[0];
+// $id = $uri[1] ?? null;
 
 // header('Content-Type: application/json');
 
@@ -111,7 +133,7 @@ $id = $uri[1] ?? null;
 //         ]);
 //         echo json_encode($data);
 //         break;
-    
+
 //     case 'DELETE':
 //         //Realizar DROP
 //         if(!$id) {
@@ -140,4 +162,3 @@ $id = $uri[1] ?? null;
 //         echo 'Esa opción no existe';
 //         break;
 // }
-?>
