@@ -1,5 +1,8 @@
 <?php
-include_once("persona.php");
+
+namespace App\Models;
+use App\Models\Persona;
+
 
 class Invitado extends Persona {
     private string $nombreInvito;

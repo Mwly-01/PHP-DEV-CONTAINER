@@ -1,6 +1,8 @@
 <?php
-include_once "persona.php";
-include_once "asistencia.php";
+
+namespace App\models;
+use App\models\Persona;
+use App\models\Asistencia;
 
 class Camper extends Persona implements Asistencia
 {
@@ -48,7 +50,6 @@ class Camper extends Persona implements Asistencia
      * Asignar el nombre del Camper, validando que cumpla con el minimo de 5 caracteres
      * @param string $nombre Define nuevo nombre
      */
-    #[Override] // No es necesario
     public function setNombre(string $nombre): void
     {
         if (strlen($nombre) >= 5) {
